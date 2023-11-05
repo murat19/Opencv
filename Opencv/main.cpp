@@ -1,85 +1,128 @@
 
 
-
-
-
+//
+//
+//
 ////#include <opencv2/core.hpp>
 //#include <opencv2/imgcodecs.hpp>
 //#include <opencv2/highgui.hpp>
-#include <iostream>
-#include "opencv2/objdetect.hpp"
-#include "opencv2/highgui.hpp"
-#include "opencv2/imgproc.hpp"
-#include "iostream"
-
-using namespace std;
-using namespace cv;
-
-/// <summary>
+//#include <iostream>
+//#include "opencv2/objdetect.hpp"
+//#include "opencv2/highgui.hpp"
+//#include "opencv2/imgproc.hpp"
+//#include "iostream"
+//
+//using namespace std;
+//using namespace cv;
+//
+// <summary>
 // import image
-/// </summary>
-Mat ImgGray, ImgBlur, ImgCanny, ImgDil, ImgErode;
-
-void GetCountours(Mat imagDil,Mat img)
-{
-	
-	vector<vector<Point>> contours;
-	vector<Vec4i> hierarchy;
-	findContours(imagDil,contours,hierarchy,RETR_EXTERNAL,CHAIN_APPROX_SIMPLE);
-
-	drawContours(img, contours, -1, Scalar(255, 0, 0), 10);
-
-	for (int i = 0; i < contours.size(); i++)
-	{
-		int area = contourArea(contours[i]);
-		vector<vector<Point>> conPoly(contours.size());
-
-		vector<Rect> bounRec(contours.size());
-		
-		
-		cout << area << endl;
-		if (area > 11)
-		{
-
-			float peri = arcLength(contours[i], true);
-			approxPolyDP(contours[i], conPoly[i], 0.02 * peri, true);
-
-			cout << conPoly[i].size() << endl;
-
-			drawContours(img, conPoly, i, Scalar(255, 0, 255), 2);
-			/*bounRec[i] = boundingRect(conPoly[i]);
-
-			rectangle(imagDil, bounRec[i].tl(), bounRec[i].br(), Scalar(0,255, 0), 5);*/
-		}
-	}
-}
-void main()
-{
-	string path = "G:/openvc/Cascade Trainer GUI/workingIslamFile.jpg";
-		Mat img = imread(path);
-		Mat ImgResize;
-		//Point2f src[4] = { {529,142},{771,190},{} }
-
-	     cvtColor(img, ImgGray,COLOR_BGR2GRAY);
-		
-		GaussianBlur(img, ImgBlur, Size(3, 3), 3, 0);
-		Canny(img, ImgCanny, 25, 75);
-
-		Mat Kernel = getStructuringElement(MORPH_RECT,Size(3,3));
-
-		dilate(ImgCanny,ImgDil,Kernel);
-
-		GetCountours(ImgDil, img);
-		imshow("image ", img);
-		imshow("image gray", ImgGray);
-	/*	imshow("image blur", ImgBlur);
-		imshow("image canny", ImgCanny);
-		imshow("image dil", ImgDil);*/
-	//	imshow("image erode", ImgErode);
-
-		waitKey(0);
-}
-
+// </summary>
+//Mat ImgGray, ImgBlur, ImgCanny, ImgDil, ImgErode;
+//int main() {
+//	double j;
+//	cout << "beginning of the program ", '\n';
+//	string path= "G:/openvc/Cascade Trainer GUI/workingIslamFile.jpg";
+//	Mat src = cv::imread(path);
+//	imshow("image ", src);
+//	waitKey(0);
+//	Mat src_Gray;
+//	int tresh = 100;
+//	RNG rng(12345);
+//
+//	cvtColor(src, src_gray, COLOR_BGR2GRAY);
+//	blur(src_gray, src_gray, Size(1, 1)); //Size(3, 3));
+//	const char* source_window = "Source";
+//	namedWindow(source_window);
+//	imshow(source_window, src);
+//
+//	const int max_thresh = 255;
+//
+//	Mat canny_output;
+//	Canny(src_gray, canny_output, thresh, thresh * 2);
+//	vector<vector<Point> > contours;
+//	vector<Vec4i> hierarchy;
+//	findContours(canny_output, contours, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE);
+//	Mat drawing = Mat::zeros(canny_output.size(), CV_8UC3);
+//
+//	vector<cv::Point> cnt;
+//	sort(contours.begin(), contours.end(), compareContourAreas);
+//
+//	for (size_t i = 0; i < contours.size(); i++)
+//	{
+//		cnt = contours[i];
+//		j = fabs(contourArea(cv::Mat(cnt)));
+//		if (j < 800) continue;
+//		Scalar color = Scalar(100, 100, 100);
+//		drawContours(drawing, contours, (int)i, color, 2, LINE_8, hierarchy, 0);
+//	}
+//
+//	imshow("Contours", drawing);
+//	waitKey();
+//
+//
+//}
+//
+//void GetCountours(Mat imagDil,Mat img)
+//{
+//	
+//	vector<vector<Point>> contours;
+//	vector<Vec4i> hierarchy;
+//	findContours(imagDil,contours,hierarchy,RETR_EXTERNAL,CHAIN_APPROX_SIMPLE);
+//
+//	drawContours(img, contours, -1, Scalar(255, 0, 0), 10);
+//
+//	for (int i = 0; i < contours.size(); i++)
+//	{
+//		int area = contourArea(contours[i]);
+//		vector<vector<Point>> conPoly(contours.size());
+//
+//		vector<Rect> bounRec(contours.size());
+//		
+//		
+//		cout << area << endl;
+//		if (area > 11)
+//		{
+//
+//			float peri = arcLength(contours[i], true);
+//			approxPolyDP(contours[i], conPoly[i], 0.02 * peri, true);
+//
+//			cout << conPoly[i].size() << endl;
+//
+//			drawContours(img, conPoly, i, Scalar(255, 0, 255), 2);
+//			/*bounRec[i] = boundingRect(conPoly[i]);
+//
+//			rectangle(imagDil, bounRec[i].tl(), bounRec[i].br(), Scalar(0,255, 0), 5);*/
+//		}
+//	}
+//}
+//void main()
+//{
+//	string path = "G:/openvc/Cascade Trainer GUI/workingIslamFile.jpg";
+//		Mat img = imread(path);
+//		Mat ImgResize;
+//		//Point2f src[4] = { {529,142},{771,190},{} }
+//
+//	     cvtColor(img, ImgGray,COLOR_BGR2GRAY);
+//		
+//		GaussianBlur(img, ImgBlur, Size(3, 3), 3, 0);
+//		Canny(img, ImgCanny, 25, 75);
+//
+//		Mat Kernel = getStructuringElement(MORPH_RECT,Size(3,3));
+//
+//		dilate(ImgCanny,ImgDil,Kernel);
+//
+//		GetCountours(ImgDil, img);
+//		imshow("image ", img);
+//		imshow("image gray", ImgGray);
+//	/*	imshow("image blur", ImgBlur);
+//		imshow("image canny", ImgCanny);
+//		imshow("image dil", ImgDil);*/
+//	//	imshow("image erode", ImgErode);
+//
+//		waitKey(0);
+//}
+//
 
 
 
