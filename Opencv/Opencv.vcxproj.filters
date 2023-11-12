@@ -63,5 +63,11 @@
     <ClCompile Include="falsecolor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Dilation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Finding contours.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

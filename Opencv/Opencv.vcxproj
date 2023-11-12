@@ -156,7 +156,9 @@
     <ClCompile Include="..\..\Opencv\Opencv\Source.cpp" />
     <ClCompile Include="..\..\Opencv\Opencv\visualisation.cpp" />
     <ClCompile Include="AlininCode.cpp" />
+    <ClCompile Include="Dilation.cpp" />
     <ClCompile Include="falsecolor.cpp" />
+    <ClCompile Include="Finding contours.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
