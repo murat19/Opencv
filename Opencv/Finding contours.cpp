@@ -37,44 +37,46 @@ vector<Point> yuvarlat(vector<Point> gelenCounter)
     vector<Point> Yenivektor;
     for (size_t i = 1; i < gelenCounter.size(); i++)
     {
-
-
         if (gelenCounter[i - 1].x - gelenCounter[i].x > 0 || gelenCounter[i - 1].y - gelenCounter[i].y > 0)
         {
             Yenivektor.push_back(gelenCounter[i]);
         }
-
     }
 
 
     return Yenivektor;
 }
 
-vector<vector<Point> > EliminateNoise(vector<vector<Point> >   gelenCOunter)
+vector<vector<Point> > EliminateNoise(vector<vector<Point> >     gelenCOunter)
 {
-    vector<vector<Point>> yeniCounter; 
-    vector<vector<Point>> geciciVect ;
+    vector<vector<Point>> yeniCounter;    
     vector<Point> yeni;
-    yeniCounter.push_back(gelenCOunter[0]);
+    
+
+   // yeniCounter.push_back(gelenCOunter[0]);
     for (size_t i = 1; i < gelenCOunter.size(); i++)
     {
+        vector<vector<Point>> geciciVect;
+     
 
-        int area = contourArea(gelenCOunter[i]);
+        int area = gelenCOunter[i].size();// contourArea(gelenCOunter[i]);// contourArea(geciciVect);
        
-        if (area > 2100)
+        if (area ==3568)
         {
-            cout << area << endl;
-            // vector < Point> yuvarlat_ = yuvarlat(gelenCOunter[i]);
+       
             if (area > 0)
             {
                 yeniCounter.push_back(gelenCOunter[i]);
             }
+           
+          /*  yeni1.push_back(gelenCOunter[gelenCOunter.size()][0]);
+            yeniCounter.push_back(yeni1); */
         }
         else
         {
             vector<Point> yeni1;
             yeni1.push_back(gelenCOunter[i][0]);
-            yeni1.push_back(gelenCOunter[i][gelenCOunter[i].size() - 1]);
+            yeni1.push_back(gelenCOunter[i][gelenCOunter.size()-1]);
 
             yeniCounter.push_back(yeni1);
         }
@@ -99,12 +101,12 @@ void thresh_callback(int, void*)
         if (area == 54516)
         {
            /* cout << area << endl;*/
-            for (size_t i1 = 0; i1 < contours[i].size(); i1++)
-            {
+            /*for (size_t i1 = 0; i1 < contours[i].size(); i1++)
+            {*/
                  vector<vector<Point>> contours1 = EliminateNoise(contours);
                 Scalar color = Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
                 drawContours(drawing, contours1, (int)i, color, 2, LINE_8, hierarchy, 0);
-            }
+           // }
         }
     }
 
