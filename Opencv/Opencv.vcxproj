@@ -142,19 +142,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Opencv\Opencv\CannyEdgeDetector.cpp" />
-    <ClCompile Include="..\..\Opencv\Opencv\cascade-classifier.cpp" />
-    <ClCompile Include="..\..\Opencv\Opencv\chapter8.cpp" />
-    <ClCompile Include="..\..\Opencv\Opencv\Distances.cpp" />
-    <ClCompile Include="..\..\Opencv\Opencv\FindContours.cpp" />
-    <ClCompile Include="..\..\Opencv\Opencv\FindObjByShape.cpp" />
-    <ClCompile Include="..\..\Opencv\Opencv\HaarCascadeDetection.cpp" />
-    <ClCompile Include="..\..\Opencv\Opencv\LATCH_match.cpp" />
-    <ClCompile Include="..\..\Opencv\Opencv\objByColor.cpp" />
-    <ClCompile Include="..\..\Opencv\Opencv\peopledetect.cpp" />
-    <ClCompile Include="..\..\Opencv\Opencv\select3dobj.cpp" />
-    <ClCompile Include="..\..\Opencv\Opencv\Source.cpp" />
-    <ClCompile Include="..\..\Opencv\Opencv\visualisation.cpp" />
     <ClCompile Include="AlininCode.cpp" />
     <ClCompile Include="Dilation.cpp" />
     <ClCompile Include="falsecolor.cpp" />

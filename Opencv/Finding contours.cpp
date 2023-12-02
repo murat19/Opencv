@@ -1,3 +1,6 @@
+
+
+
 #include "opencv2/imgcodecs.hpp"
 #include "opencv2/highgui.hpp"
 #include "opencv2/imgproc.hpp"
@@ -74,11 +77,11 @@ vector<vector<Point> > EliminateNoise(vector<vector<Point> >     gelenCOunter)
         }
         else
         {
-            vector<Point> yeni1;
+           /* vector<Point> yeni1;
             yeni1.push_back(gelenCOunter[i][0]);
             yeni1.push_back(gelenCOunter[i][gelenCOunter.size()-1]);
 
-            yeniCounter.push_back(yeni1);
+            yeniCounter.push_back(yeni1);*/
         }
     }
  //   yeniCounter.push_back(gelenCOunter[gelenCOunter.size()]);
@@ -105,8 +108,10 @@ void thresh_callback(int, void*)
             {*/
                  vector<vector<Point>> contours1 = EliminateNoise(contours);
                 Scalar color = Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
-                drawContours(drawing, contours1, (int)i, color, 2, LINE_8, hierarchy, 0);
-           // }
+                drawContours(drawing, contours, (int)i, color, 2, LINE_8, hierarchy, 0);
+
+            
+            
         }
     }
 
