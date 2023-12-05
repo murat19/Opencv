@@ -1,6 +1,8 @@
 
 
 
+ 
+ 
 #include "opencv2/imgcodecs.hpp"
 #include "opencv2/highgui.hpp"
 #include "opencv2/imgproc.hpp"
@@ -50,40 +52,32 @@ vector<Point> yuvarlat(vector<Point> gelenCounter)
     return Yenivektor;
 }
 
-vector<vector<Point> > EliminateNoise(vector<vector<Point> >     gelenCOunter)
+vector<vector<Point> > EliminateNoise(vector<Point>     gelenCOunter)
 {
     vector<vector<Point>> yeniCounter;    
     vector<Point> yeni;
     
 
-   // yeniCounter.push_back(gelenCOunter[0]);
-    for (size_t i = 1; i < gelenCOunter.size(); i++)
+    for (Point first : gelenCOunter)
     {
-        vector<vector<Point>> geciciVect;
-     
-
-        int area = gelenCOunter[i].size();// contourArea(gelenCOunter[i]);// contourArea(geciciVect);
-       
-        if (area ==3568)
+        for (Point secondRound : gelenCOunter)
         {
+            if (first.y == secondRound.y) { yeni.push_back(secondRound); }
+        }
+        if (yeni.size() >1) { yeniCounter.push_back(yeni); }
        
-            if (area > 0)
-            {
-                yeniCounter.push_back(gelenCOunter[i]);
-            }
-           
-          /*  yeni1.push_back(gelenCOunter[gelenCOunter.size()][0]);
-            yeniCounter.push_back(yeni1); */
-        }
-        else
-        {
-           /* vector<Point> yeni1;
-            yeni1.push_back(gelenCOunter[i][0]);
-            yeni1.push_back(gelenCOunter[i][gelenCOunter.size()-1]);
-
-            yeniCounter.push_back(yeni1);*/
-        }
     }
+
+   // yeniCounter.push_back(gelenCOunter[0]);
+    //for (size_t i = 1; i < gelenCOunter.size(); i++)
+    //{
+    //    vector<vector<Point>> geciciVect;
+    // 
+
+    //    int area = gelenCOunter[i].size();// contourArea(gelenCOunter[i]);// contourArea(geciciVect);
+    //   
+    //    
+    //}
  //   yeniCounter.push_back(gelenCOunter[gelenCOunter.size()]);
     return yeniCounter;
 }
@@ -93,7 +87,7 @@ void thresh_callback(int, void*)
     Canny(src_gray, canny_output, thresh, thresh * 2);
     vector<vector<Point> > contours;
     vector<Vec4i> hierarchy;
-    findContours(canny_output, contours, hierarchy, RETR_TREE, CHAIN_APPROX_SIMPLE);
+    findContours(canny_output, contours, hierarchy, RETR_TREE, CHAIN_APPROX_NONE);
     Mat drawing = Mat::zeros(canny_output.size(), CV_8UC3);
     for (size_t i = 0; i < contours.size(); i++)
     {
@@ -106,12 +100,13 @@ void thresh_callback(int, void*)
            /* cout << area << endl;*/
             /*for (size_t i1 = 0; i1 < contours[i].size(); i1++)
             {*/
-                 vector<vector<Point>> contours1 = EliminateNoise(contours);
+                 //vector<vector<Point>> contours1 = EliminateNoise(contours[i]);
+            contours== EliminateNoise(contours[i]);
                 Scalar color = Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
                 drawContours(drawing, contours, (int)i, color, 2, LINE_8, hierarchy, 0);
-
+              /*  drawContours(drawing, contours[i], (int)i, color, 2, LINE_8, hierarchy, 0);*/
             
-            
+                break;
         }
     }
 
