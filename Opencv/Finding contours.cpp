@@ -1,7 +1,5 @@
 
 
-
- 
  
 #include "opencv2/imgcodecs.hpp"
 #include "opencv2/highgui.hpp"
@@ -18,7 +16,10 @@ void thresh_callback(int, void*);
 int main()
 {
     // CommandLineParser parser(argc, argv, "{@input | HappyFish.jpg | input image}");
-    string path = "G:/openvc/Cascade Trainer GUI/workingIslamFile.jpg";// (parser.get<string>("image"));
+  //  string path = "G:/openvc/Cascade Trainer GUI/p/Capture1.png";// (parser.get<string>("image"));
+    string path = "G:/openvc/Cascade Trainer GUI/workingIslamFile1.jpg";// (parser.get<string>("image"));
+   
+  
     Mat src = imread(path);
     /* if (src.empty())
      {
@@ -40,12 +41,16 @@ int main()
 vector<Point> yuvarlat(vector<Point> gelenCounter)
 {
     vector<Point> Yenivektor;
-    for (size_t i = 1; i < gelenCounter.size(); i++)
+    float max=0;
+    for (Point first : gelenCounter)
     {
-        if (gelenCounter[i - 1].x - gelenCounter[i].x > 0 || gelenCounter[i - 1].y - gelenCounter[i].y > 0)
+        for (Point secondRound : gelenCounter)
         {
-            Yenivektor.push_back(gelenCounter[i]);
+            if (first.x - secondRound.x > max) {
+                max = first.x - secondRound.x;           }
         }
+       // if (yeni.size() > 1) { yeniCounter.push_back(yeni); }
+
     }
 
 
@@ -94,19 +99,20 @@ void thresh_callback(int, void*)
         int area = contourArea(contours[i]);
 
         /* if (area > 33476 && area < 300000)*/
-
-        if (area == 54516)
+        cout << area << endl;
+       /* if (area > 0) */
+        if (area == 22111)
         {
-           /* cout << area << endl;*/
+            cout << area << endl;
             /*for (size_t i1 = 0; i1 < contours[i].size(); i1++)
             {*/
                  //vector<vector<Point>> contours1 = EliminateNoise(contours[i]);
-            contours== EliminateNoise(contours[i]);
+             //  contours = EliminateNoise(contours[i]);
                 Scalar color = Scalar(rng.uniform(0, 256), rng.uniform(0, 256), rng.uniform(0, 256));
                 drawContours(drawing, contours, (int)i, color, 2, LINE_8, hierarchy, 0);
               /*  drawContours(drawing, contours[i], (int)i, color, 2, LINE_8, hierarchy, 0);*/
             
-                break;
+              //  break;
         }
     }
 
